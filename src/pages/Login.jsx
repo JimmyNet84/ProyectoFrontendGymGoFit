@@ -38,6 +38,7 @@ export default function Login() {
       }
 
       localStorage.setItem('fitgo-auth', JSON.stringify(authData))
+      localStorage.setItem('fitgo-user', JSON.stringify(payload.usuario))
       addToast('Inicio de sesión exitoso', 'success')
 
       const rol = payload?.usuario?.rol?.toLowerCase?.() || ''

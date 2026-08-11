@@ -1,7 +1,9 @@
 import axios from 'axios'
 
+const baseURL = (import.meta.env.VITE_API_URL || 'https://proyectobackendgymgofit.onrender.com/api').replace(/\/$/, '')
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'https://proyectobackendgymgofit.onrender.com/api',
+  baseURL,
   headers: {
     'Content-Type': 'application/json'
   }
@@ -10,11 +12,16 @@ const api = axios.create({
 api.interceptors.request.use((config) => {
   const auth = localStorage.getItem('fitgo-auth')
   if (auth) {
-    const parsed = JSON.parse(auth)
-    if (parsed?.token) {
-      config.headers.Authorization = `Bearer ${parsed.token}`
+    try {
+      const parsed = JSON.parse(auth)
+      if (parsed?.token) {
+        config.headers.Authorization = `Bearer ${parsed.token}`
+      }
+    } catch {
+      localStorage.removeItem('fitgo-auth')
     }
   }
+
   return config
 })
 
