@@ -25,6 +25,14 @@ export default function Socios() {
 
   const getSocioIdentifier = (socio) => socio?.id ?? socio?.socio_id ?? socio?.socioId ?? socio?.id_socio ?? socio?.socioid
 
+  const getEstadoVariant = (estado) => {
+    const normalized = `${estado || ''}`.trim().toLowerCase()
+    if (normalized === 'inactivo' || normalized === 'inactiva' || normalized.includes('inactivo') || normalized.includes('inact') || normalized === 'inactive' || normalized.includes('inactive')) return 'danger'
+    if (normalized === 'vencido' || normalized.includes('venc')) return 'danger'
+    if (normalized === 'activo' || normalized.includes('activo')) return 'success'
+    return 'outline'
+  }
+
   const loadSocios = async () => {
     setLoading(true)
     try {
@@ -142,7 +150,7 @@ export default function Socios() {
                         <TableCell>{socio.telefono}</TableCell>
                         <TableCell>{socio.email}</TableCell>
                         <TableCell>
-                          <Badge variant={socio.estado === 'Activo' ? 'success' : socio.estado === 'Vencido' ? 'danger' : 'outline'}>
+                          <Badge variant={getEstadoVariant(socio.estado)}>
                             {socio.estado || 'Sin estado'}
                           </Badge>
                         </TableCell>

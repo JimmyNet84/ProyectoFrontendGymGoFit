@@ -161,6 +161,6 @@ El mismo campo `dni` se usa tanto si se escribe manualmente como si viene de un 
 
 - Usar un cliente HTTP centralizado (ej. `axios.create()`) que inyecte automáticamente el header `Authorization` y capture errores `401/403` para redirigir al login.
 - Todos los mensajes de error/éxito del backend vienen en la propiedad `mensaje` — mostrarlos en toasts/notificaciones.
-- Los estados de socio (`estado`) son: `"Activo"` (verde), `"Vencido"` (rojo). Usar estos colores de forma consistente en toda la UI (badges, tablas, KPIs).
+- Los estados de socio (`estado`) son: `"Activo"` (verde), `"Inactivo"` (rojo). Usar estos colores de forma consistente en toda la UI (badges, tablas, KPIs).
 - Fechas (`fecha_inicio`, `fecha_fin`, `fecha_registro`) llegan en formato `YYYY-MM-DD`; `horario` y `fecha` (asistencias) llegan como timestamp ISO completo.
 - Tailwind: usar un layout tipo sidebar + topbar para el panel administrativo; la pantalla `/checkin` puede ser standalone/fullscreen (pensada para una tablet en recepción).
